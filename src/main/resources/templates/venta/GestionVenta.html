@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VENTAS</title>
+     
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    
+       <style type="text/css">
+        .form-control, .form-group, td{
+        	font-family: sans-serif;
+        	font-size: 12pt;
+        }
+
+    </style>
+</head>
+<body background="/images/boutique.jpg">
+  <div th:replace="/inicio/menu :: navbar"></div><br><br>
+    <div class="container">
+        
+        <div class="card">
+
+            <div class="card-header bg-secondary">
+
+                <h3 class="text-white">Realizar Ventas <i class="fas fa-barcode"></i></h3>
+            </div>
+
+
+            <div class="card-body" >
+
+                <form class="was-validated form-group" th:action="@{/venta/buscarproducto}" th:object="${producto}" method="post">
+                    
+                    <div class="row">
+                        <div class="btn-group-sm">
+                            
+                        </div>
+                </div>
+                        <br>
+                        
+                    <div class="row">
+    
+                        <div class="col-md-1">
+    
+                             <input type="hidden" th:field="*{idproducto}" class="form-control">
+                             
+                             <input class="btn btn-outline-success" type="submit" value="Registrar"> 
+    
+                        </div>
+    
+                        <div class="col-md-2">
+                        
+                            <input type="number" th:field="*{codigo}" name="codigo" class="form-control" placeholder="codigo" required >
+    
+                        </div>
+                         
+                          <div class="col-md-2">                       
+                             <input type="number" class="form-control" name="cantidad" th:value="${cant}" step="1" min="0" placeholder="Cantidad" required>
+                          </div>
+                          
+                          
+                          <div class="col-md-2">                       
+                             <input type="number" class="form-control" name="idventa" th:value="${idv}" step="1" min="0" placeholder="No. Venta" required>
+                          </div>
+                          
+                          <div class="col-md-2">                       
+                             <input type="date" class="form-control" name="fecha" th:value="${fech}" step="1" min="0" placeholder="Fecha Venta" required>
+                          </div>
+                          
+                          <div class="col-md-2">
+                             <a th:href="@{/venta/VerVentas}" class="btn btn-outline-warning">Ver Ventas</a>
+                          </div>
+                          
+                        </div>
+    
+                    <div class="row">
+    
+                        <div class="col-md-6">
+                        
+                         <label class="font-weight-bold">Nombre Producto: </label>
+                            <input type="text" th:field="*{nombreproducto}" class="form-control" maxlength="50" readonly >
+    
+    
+                        </div>
+    
+                        <div class="col-md-6">
+                        
+                        <label class="font-weight-bold">Descripción: </label>
+                            <input type="text" th:field="*{descripcion}" class="form-control" maxlength="100"  readonly>
+                            
+                        </div>
+    
+                    </div>
+    
+                    <div class="row">
+    
+                        <div class="col-md-6">
+                       
+                          <label class="font-weight-bold">Precio Venta: </label>
+                            <input type="number" th:field="*{precio}" class="form-control" step="0.01" min="0" readonly  >
+                            
+                           
+                        </div> 
+                        
+                        <div class="col-md-2">
+                       
+                            <label class="font-weight-bold">Stock: </label>
+                            <input type="number" th:field="*{stock}" class="form-control" step="1" min="0" readonly>
+                                                   
+                        </div>  
+                          <div class="col-md-2">
+                       
+                            <label class="font-weight-bold">Total: </label>
+                            <input type="number" class="form-control"   th:value="${mont}" readonly>
+                                                   
+                        </div>  
+                   </div>
+                   
+             </form>
+         </div>
+           <div th:if="*{error != null}"
+                 class="alert alert-warning alert-dismissible fade show" role="alert">
+                 <button type="button" class="close" data-dismiss="alert">&times;</button>  
+                 <h4 th:text=*{error}></h4>
+               </div>
+
+            </div>
+
+        </div>
+
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VER VENTAS</title>
+     
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    
+       <style type="text/css">
+        .form-control, .form-group, td{
+        	font-family: sans-serif;
+        	font-size: 12pt;
+        }
+
+    </style>
+</head>
+<body background="/images/boutique.jpg">
+  <div th:replace="/inicio/menu :: navbar"></div><br><br>
+    <div class="container">
+        
+        <div class="card">
+
+            <div class="card-header bg-secondary">
+
+                <h3 class="text-white">Ver Ventas <i class="fas fa-barcode"></i></h3>
+            </div>
+
+
+            <div class="card-body" >
+
+                 <table class="table table-striped">
+
+                    <thead>
+
+                        <tr>
+
+                           
+                            <th>Numero Venta</th>
+                            <th>Fecha</th>
+                            <th>$Venta</th>
+
+                        </tr>
+
+                    </thead>
+                    
+                         <tr th:each="productos : ${product}">
+                         <td th:text="${productos.idventa}"></td>
+                        <td th:text="${productos.fecha}"></td>
+                        <td th:text="${productos.monto}"></td>
+       
+                         </tr>
+
+                    <tbody>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+         </div>
+
+    </div>
+
+</body>
+
+</html>

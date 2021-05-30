@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTION PRODUCTOS</title>
+     
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    
+       <style type="text/css">
+        .form-control, .form-group, td{
+        	font-family: sans-serif;
+        	font-size: 12pt;
+        }
+
+    </style>
+</head>
+<body background="/images/boutique.jpg">
+  <div th:replace="/inicio/menu :: navbar"></div><br><br>
+    <div class="container">
+        
+        <div class="card">
+
+            <div class="card-header bg-secondary">
+
+                <h3 class="text-white">Gestionar Productos <i class="fas fa-barcode"></i></h3>
+            </div>
+
+
+            <div class="card-body" >
+
+                <form class="was-validated form-group" th:action="@{/producto/agregar}" th:object="${producto}" method="post">
+                    
+                    <div class="row">
+                        <div class="btn-group-sm">
+                            <input class="btn btn-outline-success" type="submit" value="Agregar Nuevo Producto">  <input class="btn btn-outline-warning" type="submit" value="Actualizar Producto"> <input class="btn btn-outline-primary" type="reset" value="Restablecer Campos">
+                            
+                        </div>
+                        </div>
+                        <br>
+                        
+                    <div class="row">
+    
+                        <div class="col-md-6">
+    
+                             <input type="hidden" th:field="*{idproducto}" class="form-control">
+                             
+                             
+                            <label class="font-weight-bold">Codigo: </label>
+                            <input type="number" th:field="*{codigo}" class="form-control" step="100" min="0" required>
+    
+                        </div>
+    
+                        <div class="col-md-6">
+    
+                            <label class="font-weight-bold">Nombre Producto: </label>
+                            <input type="text" th:field="*{nombreproducto}" class="form-control" maxlength="50" required>
+    
+                        </div>
+    
+                    </div>
+    
+                    <div class="row">
+    
+                        <div class="col-md-6">
+    
+                            <label class="font-weight-bold">Descripción: </label>
+                            <input type="text" th:field="*{descripcion}" class="form-control" maxlength="100" required>
+    
+                        </div>
+    
+                        <div class="col-md-6">
+                            <label class="font-weight-bold">Precio Venta: </label>
+                            <input type="number" th:field="*{precio}" class="form-control" step="0.01" min="0" required >
+                        </div>
+    
+                    </div>
+    
+                    <div class="row">
+    
+                        <div class="col-md-6">
+                       
+                            <label class="font-weight-bold">Stock: </label>
+                            <input type="number" th:field="*{stock}" class="form-control" step="1" min="0" required>
+                           
+                        </div>         
+                   </div>
+             </form>
+         </div>
+
+            <div class="card-footer">
+               <div th:if="*{error != null}"
+                 class="alert alert-warning alert-dismissible fade show" role="alert">
+                 <button type="button" class="close" data-dismiss="alert">&times;</button>  
+                 <h4 th:text=*{error}></h4>
+               </div>
+                <table class="table table-striped">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Codigo</th>
+                            <th>Nombre Producto</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Operación</th>
+                        
+
+                        </tr>
+
+                    </thead>
+                         <tr th:each="producto : ${productos}">
+                         <td th:text="${producto.codigo}"></td>
+                         <td th:text="${producto.nombreproducto}"></td>
+                         <td th:text="${producto.descripcion}"></td>
+                         <td th:text="${producto.precio}"></td>
+                         <td th:text="${producto.stock}"></td>                       
+                         <td><a th:href="@{/producto/ActualizarProducto/}+${producto.idproducto}" class="btn btn-outline-warning">Editar</a> <a class="btn btn-outline-danger" th:href="@{/producto/EliminarProducto/}+${producto.idproducto}">Eliminar</a></td>
+
+                         </tr>
+
+                    <tbody>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

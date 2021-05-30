@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+      
+    <style type="text/css">
+        .content{
+             height: 100vh;
+             background-image: url(/images/fondo.png);
+             background-size: 40%;
+             background-repeat: no-repeat;
+             background-position: center;
+        }
+        .form-control, .form-group{
+        	font-family: sans-serif;
+        	font-size: 15pt;
+
+        }
+
+    </style>
+ 
+</head>
+<body background="/images/boutique.jpg" >
+<section class="container">
+    <div class="row content d-flex justify-content-center align-items-center">
+        <div class="col-md-5">
+            <div class="box shadow bg-write p-4" style="background-color:black; border-radius: 10px; opacity: 0.9">
+                <h3 class="mb-4 text-center fs-1 text-white">Acceder al Sistema</h3>
+                
+                  <div th:if="${param.error != null and session['SPRING_SECURITY_LAST_EXCEPTION'] != null}"
+                  class="alert alert-warning alert-dismissible fade show"
+                  role="alert">
+                 <button type="button" class="close" data-dismiss="alert">&times;</button>  
+                 <h4 th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"></h4>
+                 </div>
+                 
+                <form class="mb-3 form-group" th:action="@{/acceso/acceder}" method="post">
+                    
+                    <div class="form-group">
+                            <label class="text-white"> Ingrese su nombre de usuario: </label>
+                            <input type="text" class="form-control border border-dark" placeholder="Nombre de usuario" 
+                             name="username"  required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="text-white"> Ingrese su contraseña: </label>
+                        <input type="password" class="form-control border border-dark" placeholder="Contraseña"
+                          name="password" required="required"><br>
+                    </div>
+
+                     <input type="submit" class="form-control btn-primary" value="Acceder">
+
+                </form>
+
+            </div>
+            
+        </div>
+    </div>
+    
+</section> 
+</body>
+</html>

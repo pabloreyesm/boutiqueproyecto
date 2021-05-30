@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTION EMPLEADOS</title>
+     
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    
+       <style type="text/css">
+        .form-control, .form-group, td{
+        	font-family: sans-serif;
+        	font-size: 12pt;
+        }
+
+    </style>
+</head>
+<body background="/images/boutique.jpg">
+ <div th:replace="/inicio/menu :: navbar"></div><br><br>
+    <div class="container">
+        
+        <div class="card">
+
+            <div class="card-header bg-secondary">
+
+                <h3 class="text-white">Gestionar Empleados <i class="fas fa-users"></i></h3>
+            </div>
+
+
+            <div class="card-body" >
+
+                <form class="was-validated form-group" th:action="@{/empleado/agregar}" th:object="${empleado}" method="post">
+                    
+                    <div class="row">
+                        <div class="btn-group-sm">
+                            <input class="btn btn-outline-success" type="submit" value="Agregar Nuevo Empleado">  <input class="btn btn-outline-warning" type="submit" value="Actualizar Empleado"> <input class="btn btn-outline-primary" type="reset" value="Restablecer Campos">
+                            
+                        </div>
+                        </div>
+                        <br>
+                        
+                    <div class="row">
+    
+                        <div class="col-md-6">
+    
+                             <input type="hidden" th:field="*{idempleado}" class="form-control">
+                            <label class="font-weight-bold" for="nombre">Nombre:</label>
+                            <input type="text" th:field="*{nombre}" class="form-control" maxlength="40" required>
+    
+                        </div>
+    
+                        <div class="col-md-6">
+    
+                            <label class="font-weight-bold" for="apellidopaterno">Apellido Paterno:</label>
+                            <input type="text" th:field="*{apellidop}" class="form-control" maxlength="40" required>
+    
+                        </div>
+    
+                    </div>
+    
+                    <div class="row">
+    
+                        <div class="col-md-6">
+    
+                            <label class="font-weight-bold" for="apellidomaterno">Apellido Materno:</label>
+                            <input type="text" th:field="*{apellidom}" class="form-control" maxlength="40" required>
+    
+                        </div>
+    
+                        <div class="col-md-6">
+                            <label class="font-weight-bold" for="telefono">Teléfono:</label>
+                            <input type="tel" th:field="*{telefono}" class="form-control" required >
+                        </div>
+    
+                    </div>
+    
+                    <div class="row">
+    
+                        <div class="col-md-6">
+                       
+                            <label class="font-weight-bold" for="domicilio">Domicilio:</label>
+                            <input type="text" th:field="*{direccion}" class="form-control" maxlength="80" required>
+                           
+                        </div>
+                        
+                        <div class="col-md-6">
+                        
+                        <label class="font-weight-bold" for="Usuario">Usuario:</label>
+                        <input type="text" th:field="*{usuario}" class="form-control" maxlength="10" required>
+                          
+                    </div>
+            
+                </div>
+    
+                <div class="row">
+    
+                    <div class="col-md-6">
+                       
+                       <label class="font-weight-bold">Contraseña:</label>
+                       <input type="password"  class="form-control" name="clave" id="pass"  required>
+                    </div>
+                    
+                     <div class="col-md-6">
+                       
+                       <label class="font-weight-bold">Rol: </label>
+                       <select class="form-control" th:field="*{Rol}" required>
+                    
+                         <option value=""> </option>
+                         <option value="Administrador">Administrador</option>
+                         <option value="Empleado">Empleado</option>
+                       </select>
+                       
+                    </div>
+               </div> 
+       </form>
+                   
+            </div>
+
+            <div class="card-footer">
+               <div th:if="*{error != null}"
+                 class="alert alert-warning alert-dismissible fade show" role="alert">
+                 <button type="button" class="close" data-dismiss="alert">&times;</button>  
+                 <h4 th:text=*{error}></h4>
+               </div>
+                <table class="table table-striped">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Nombre Empleado</th>
+                            <th>Teléfono</th>
+                            <th>Domicilio</th>
+                            <th>Usuario</th>
+                            <th>Rol</th>
+                            <th>Operación</th>
+                        
+
+                        </tr>
+
+                    </thead>
+                         <tr th:each="empleado : ${empleados}">
+                         <td th:text="${empleado.nombre } + ' ' + ${empleado.apellidop} +  ' ' +  ${empleado.apellidom}"></td>
+                         <td th:text="${empleado.telefono}"></td>
+                         <td th:text="${empleado.direccion}"></td>
+                         <td th:text="${empleado.usuario}"></td>
+                         <td th:text="${empleado.Rol}"></td>                       
+                         <td><a th:href="@{/empleado/ActualizarEmpleado/}+${empleado.idempleado}" class="btn btn-outline-warning">Editar</a> <a class="btn btn-outline-danger" th:href="@{/empleado/EliminarEmpleado/}+${empleado.idempleado}">Eliminar</a></td>
+
+                         </tr>
+
+                    <tbody>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
