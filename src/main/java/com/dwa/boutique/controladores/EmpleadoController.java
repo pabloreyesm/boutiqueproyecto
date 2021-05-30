@@ -48,7 +48,7 @@ public class EmpleadoController {
 		{
 			modelo.addAttribute("error",servicioEmpleado.getMensaje());
 		}
-		return "empleado/gestionempleado";
+		return "/empleado/gestionempleado";
 	}
 	
 	@PostMapping("/empleado/agregar")
