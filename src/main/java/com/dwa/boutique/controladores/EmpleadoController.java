@@ -25,7 +25,7 @@ public class EmpleadoController {
 	@Autowired
 	ServicioAcceso servicioAcceso;
 	
-	@GetMapping("empleado/gestionempleado")
+	@GetMapping("/empleado/gestionempleado")
 	public String listar(Model modelo ,HttpSession sesion) {
 		
 		int iduser = Integer.parseInt(sesion.getAttribute("iduser").toString());
@@ -46,7 +46,7 @@ public class EmpleadoController {
 		{
 			modelo.addAttribute("error",servicioEmpleado.getMensaje());
 		}
-		return "/empleado/gestionempleado";
+		return "empleado/gestionempleado";
 	}
 	
 	@PostMapping("/empleado/agregar")
